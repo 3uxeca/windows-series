@@ -54,6 +54,7 @@ const ThemeIdea = (props: Props) => {
       <SectionTitle
         title={"테마별 아이디어"}
         desc={"투자자에게 관심도가 높은 산업별 아이디어 목록을 알려드립니다."}
+        moveUrl={"/idea-list"}
       />
       <MainTheme />
       <div className={styled.cardWrap}>

@@ -1,3 +1,5 @@
+@import "@/styles/variable.scss";
+
 // 공통 컨테이너/래퍼
 .mainContainer {
   background-color: #fff;
@@ -5,6 +7,37 @@
 .wrapper {
   width: 880px;
   margin: 0 auto 100px;
+}
+
+// swiper영역
+.mainSwiper {
+  width: 100%;
+  height: 600px;
+  background-color: #e2f5fa;
+  padding: 60px 0;
+  .swiperWrap {
+    width: 880px;
+    margin: 0 auto;
+  }
+  .swiperItem {
+    .text {
+      font-size: 30px;
+      font-weight: 400;
+      color: #000;
+      line-height: 38px;
+      text-align: center;
+      .bold {
+        font-weight: 800;
+      }
+    }
+    .icon {
+      @include background;
+      margin: 60px auto;
+      width: 426.67px;
+      height: 240px;
+      background-image: url("/images/img-main-1.png");
+    }
+  }
 }
 
 // 섹션별 제목 컴포넌트
@@ -48,6 +81,7 @@
 
 // 테마 카테고리 목록
 .themeIdea {
+  margin-top: 100px;
   .mainTheme {
     margin-bottom: 20px;
 
