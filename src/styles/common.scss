@@ -296,7 +296,34 @@ ul {
 
 .swiper-3d {
   height: 100%;
-  padding-top: rem(10) !important;
+  // padding-top: rem(10) !important;
+}
+
+.swiper-navigation-wrap {
+  @include flex;
+  position: absolute;
+  width: 640px;
+  height: 410px;
+  margin: 0 auto;
+  z-index: 3;
+  .swiper-button-prev {
+    @include background;
+    width: 32px;
+    height: 56px;
+    background-image: url("/images/icon-button-prev.png");
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+  }
+  .swiper-button-next {
+    @include background;
+    width: 32px;
+    height: 56px;
+    background-image: url("/images/icon-button-next.png");
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
 }
 
 input:-webkit-autofill,
