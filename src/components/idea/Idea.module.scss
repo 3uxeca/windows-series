@@ -1,0 +1,230 @@
+@import "@/styles/variable.scss";
+
+.mainContainer {
+  width: 100%;
+}
+.headerWrap {
+  @include flex;
+  @include col;
+  @include sb;
+  width: 100%;
+  height: 288px;
+  background-color: #f9f9f9;
+  .titleWrap {
+    @include flex;
+    @include col;
+    @include top;
+    padding-top: 80px;
+    width: 880px;
+    margin: 0 auto;
+    .title {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 18px;
+      color: #000;
+    }
+    .desc {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: -0.06px;
+      color: #2a2a2a;
+    }
+  }
+  .stepWrap {
+    @include flex;
+    @include sb;
+    width: 880px;
+    margin: 0 auto;
+    div {
+      @include flex;
+      width: 220px;
+      padding-bottom: 10px;
+      box-sizing: border-box;
+      border-bottom: 2px solid transparent;
+      font-size: 14px;
+      font-weight: 400;
+      color: #aaa;
+      cursor: pointer;
+      &:hover, &.active {
+        font-size: 14px;
+        font-weight: 600;
+        color: #000;
+        border-bottom: 2px solid #000;
+      }
+    }
+  }
+}
+.sectionContents {
+  background-color: #fff;
+  width: 880px;
+  margin: 0 auto;
+  .btnWrap {
+    @include flex;
+    column-gap: 20px;
+    padding-bottom: 120px;
+    .btn {
+      @include btnform;
+      width: 140px;
+      height: 42px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      background-color: #1363df;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      &.white {
+        background-color: #fff;
+        border: 1px solid #e8ecf2;
+        color: #aaa;
+      }
+    }
+  }
+  .section {
+    padding-top: 120px;
+    padding-bottom: 120px;  
+    .sectionTitle {
+      @include flex;
+      @include fs;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;      
+      line-height: 24.2px;
+      &.final {
+        font-size: 30px;
+      }
+      span {
+        font-weight: 400;
+        color: #1363df;
+        margin-right: 14px;
+      }
+    }  
+    .sectionDesc {
+      font-size: 14px;
+      font-weight: 400;
+      color: #000;
+      margin-top: 20px;
+      margin-bottom: 80px;
+    }
+    .form {
+      padding-top: 60px;
+      &.select {
+        @include flex;
+        @include fs;
+        column-gap: 20px;
+        .label {
+          margin-bottom: 0;
+        }
+        .desc {
+          margin-bottom: 0;
+        }
+      }
+      .label {
+        font-size: 18px;
+        font-weight: 400;
+        color: #000;
+        margin-bottom: 14px;
+        &.hasDesc {
+          margin-bottom: 8px;
+        }
+      }
+      .desc {
+        margin-bottom: 14px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #aaa;
+      }
+      input[type="text"], textarea {
+        width: 100%;
+        box-sizing: 100%;
+        border: 1px solid #e8ecf2;
+        border-radius: 3px;
+        padding: 10px;
+        font-size: 12px;
+        color: #000;
+        resize: none;
+        outline: 0 none;
+        &::placeholder {
+          color: #aaa;
+        }
+      }
+      textarea {
+        height: 110px;
+      }
+      select {
+        width: 240px;
+        height: 35px;
+        border: 1px solid #e8ecf2;
+        border-radius: 3px;
+        padding: 10px;
+        font-size: 12px;
+        background: url('/images/icon-select-arrow-down.png') no-repeat right 10px center;
+        outline: 0 none;
+
+        &::-ms-expand {
+          display: none;
+        }
+        -o-appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;        
+        background-size: 15px;
+      }
+    }
+  }
+  .uploadWrap {
+    input[type="file"] {
+      display: none;
+    }
+    .uploadBox {
+      width: 100%;
+      height: 140px;
+      border: 1px solid #e8ecf2;
+      border-radius: 3px;
+      padding: 24.5px 10px;
+      &.uploaded {
+        padding: 10px;
+      }
+      .dropZone {
+        @include flex;
+        @include col;
+        row-gap: 20px;
+        .uploadTxt {
+          font-size: 12px;
+          font-weight: 400;
+          color: #aaa;
+        }
+        .uploadIcon {
+          @include background;
+          display: block;
+          width: 57px;
+          height: 57px;
+          background-image: url('/images/icon-fild-dnd.png');
+          cursor: pointer;
+        }
+        .uploadList {
+          width: 100%;
+          color: #000;
+          font-size: 14px;
+          line-height: 18px;
+          .filename {
+            @include flex;
+            @include fs;
+            .delete {
+              display: none;   
+            }          
+            &:hover {
+              .delete {
+                display: block;
+                font-size: 14px;
+                color: #aaa;
+                margin-left: 14px;
+                line-height: 18px;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

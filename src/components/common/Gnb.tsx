@@ -13,6 +13,9 @@ const Gnb = (props: Props) => {
   const userInfo = {
     userNm: "김시리즈제로",
   }
+  const moveMakeIdea = () => {
+    router.push("/idea/register");
+  }
   return (
     <div className={styled.gnbContainer}>
       <div className={styled.gnbWrap}>
@@ -37,7 +40,7 @@ const Gnb = (props: Props) => {
               <div className={styled.name}>{userInfo.userNm}</div>
               <div className={`${styled.btnArrow} ${styled.isUserOpen ? styled.isOpen : ''}`}></div>
             </div>
-            <div className={styled.btn}>아이디어 만들기</div>
+            <div className={styled.btn} onClick={moveMakeIdea}>아이디어 만들기</div>
             </>
             :
             <>
