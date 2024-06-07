@@ -15,6 +15,7 @@ type Props = {};
 const IdeaList = (props: Props) => {
   const [swiper, setSwiper] = useState<SwiperCore>();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isOpen, setOpen] = useState(false);
   const handleActiveIndex = (index: number) => {
     setActiveIndex(index);
   };
@@ -130,7 +131,7 @@ const IdeaList = (props: Props) => {
             slideShadows: false,
           }}
           onSwiper={setSwiper}
-          onSlideChange={(swiper) => handleActiveIndex(swiper.activeIndex)}
+          onSlideChange={(swiper:any) => handleActiveIndex(swiper.activeIndex)}
         >
           {swiperData.map((item, index) => {
             return (
@@ -160,6 +161,17 @@ const IdeaList = (props: Props) => {
       </div>
       <div className={styled.listWrap}>
         {/* 카테고리에 따라 url 변경하고 데이터 가져와서 뿌릴건지? */}
+        <div className={styled.sortWrap}>
+          <div className={`${styled.iconArrow} ${!isOpen ? styled.close : ''}`}></div>
+          <div className={styled.sortItems}>
+            <div>추천순</div>
+            <div>조회수</div>
+            <div>달성율</div>
+            <div>모집금액순</div>
+            <div>마감임박순</div>
+            <div>최신순</div>
+          </div>
+        </div>
         <div className={styled.cardWrap}>
           {listData.map((item, index) => {
             return (

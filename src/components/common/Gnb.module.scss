@@ -71,7 +71,35 @@
       @include flex;
       @include fe;
       column-gap: 10px;
-      div {
+      .myinfo {
+        @include flex;
+        @include sb;
+        column-gap: 10px;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #000;
+        box-sizing: border-box;
+        .btnArrow {
+          @include background;
+          width: 16px;
+          height: 16px;
+          background-image: url('/images/icon-user-arrow-down.png');
+        }
+      }
+      .btn {
+        @include btnform;
+        border-radius: 3px;
+        background-color: #1363df;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        padding: 11.5px 14px;
+        &:hover {
+          background-color: #000;
+        }
+      }
+      .btnText {
         cursor: pointer;
         font-weight: 500;
         font-size: 14px;

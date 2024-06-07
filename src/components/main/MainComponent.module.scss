@@ -337,5 +337,41 @@
   .listWrap {
     width: 880px;
     margin: 100px auto;
+    .sortWrap {
+      @include flex;
+      @include fs;
+      margin-bottom: 20px;
+      .iconArrow {
+        @include background;
+        width: 12px;
+        height: 12px;
+        background-image: url('/images/icon-sort-arrow-up.png');
+        margin-right: 24px;
+        cursor: pointer;
+        &.close {
+          transform: rotate(180deg);
+        }
+      }
+      .sortItems {
+        @include flex;
+        @include fs;
+        div {
+          font-size: 12px;
+          font-weight: 400;
+          color: #000;
+          cursor: pointer;
+          &:not(:last-child) {
+            &::after {
+              content: "|";
+              color: #e8ecf2;
+              margin: 0 8px;
+            }          
+          }
+          &:hover,&.active {
+            font-weight: 700;
+          }
+        }
+      }
+    }
   }
 }

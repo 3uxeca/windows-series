@@ -10,6 +10,9 @@ const Gnb = (props: Props) => {
   const moveMain = () => {
     router.push("/main");
   };
+  const userInfo = {
+    userNm: "김시리즈제로",
+  }
   return (
     <div className={styled.gnbContainer}>
       <div className={styled.gnbWrap}>
@@ -27,8 +30,21 @@ const Gnb = (props: Props) => {
           </div>
         </div>
         <div className={styled.right}>
-          <div className={styled.btnLogin}>로그인</div>
-          <div className={styled.btnSignin}>회원가입</div>
+          {
+            userInfo ?
+            <>
+            <div className={styled.myinfo}>
+              <div className={styled.name}>{userInfo.userNm}</div>
+              <div className={`${styled.btnArrow} ${styled.isUserOpen ? styled.isOpen : ''}`}></div>
+            </div>
+            <div className={styled.btn}>아이디어 만들기</div>
+            </>
+            :
+            <>
+            <div className={styled.btnText}>로그인</div>
+            <div className={styled.btnText}>회원가입</div>
+            </>
+          }
         </div>
       </div>
     </div>
