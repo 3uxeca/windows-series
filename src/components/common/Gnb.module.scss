@@ -80,6 +80,7 @@
         font-weight: 400;
         color: #000;
         box-sizing: border-box;
+        cursor: pointer;
         .btnArrow {
           @include background;
           width: 16px;
