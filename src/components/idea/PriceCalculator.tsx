@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from "@/components/idea/Idea.module.scss";
 
 interface CostItem {
   name: string;
@@ -55,19 +56,19 @@ const PriceCalculator: React.FC = () => {
           {costItems.map((item, index) => (
             <tr key={index}>
               {index === 0 && (
-                <td rowSpan={costItems.length}>원가</td>
+                <th rowSpan={costItems.length}>원가</th>
               )}
-              <td>{item.name}</td>
-              <td>{item.amount}</td>
+              <th>{item.name}</th>
+              <td className={styled.em}>{item.amount}</td>
             </tr>
           ))}
           <tr>
-            <td>이익율(마진)</td>
-            <td colSpan={2}>{profitMargin}%</td>
+            <th>이익율(마진)</th>
+            <td colSpan={2} className={styled.em}>{profitMargin}%</td>
           </tr>
           <tr>
-            <td colSpan={2}>판매가(소비자가격)</td>
-            <td>{sellingPrice.toFixed(2)}</td>
+            <th colSpan={2} className={styled.total}>판매가(소비자가격)</th>
+            <td className={styled.total}>{sellingPrice.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>
