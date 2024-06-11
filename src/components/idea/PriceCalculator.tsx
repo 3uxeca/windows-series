@@ -54,7 +54,9 @@ const PriceCalculator: React.FC = () => {
         <tbody>
           {costItems.map((item, index) => (
             <tr key={index}>
-              <td>원가</td>
+              {index === 0 && (
+                <td rowSpan={costItems.length}>원가</td>
+              )}
               <td>{item.name}</td>
               <td>{item.amount}</td>
             </tr>
