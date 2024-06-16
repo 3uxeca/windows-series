@@ -5,16 +5,24 @@ import styled from "@/components/idea/Idea.module.scss";
 
 type Props = {};
 
-const PerformanceCalculator = (props: Props) => {
+const IncreaseRateCalulator = (props: Props) => {
   const { setSgnaExpenses, totalPrice, sellingPrice } = useIdeaPriceStore();
   // 원가 항목을 관리하는 상태
   const [costItems, setCostItems] = useState<ICostItem[]>([
-    { name: "급여(1인 평균)", amount: 35000000 },
-    { name: "업무추진비", amount: 3600000 },
-    { name: "사무실 임차료", amount: 6000000 },
-    { name: "접대비", amount: 5000000 },
-    { name: "광고선전비", amount: 12000000 },
-    { name: "예비비용", amount: 3000000 },
+    { name: "급여인상율", amount: 0.02, description: "직원 1명당 연봉 인상율" },
+    {
+      name: "업무추진비 인상율",
+      amount: 0.05,
+      description: "직원 증가 시 인상되도록 설정",
+    },
+    {
+      name: "사무실 임차료 인상율",
+      amount: 0.05,
+      description: "직원 증가 시 인상되도록 설정",
+    },
+    { name: "접대비 인상율", amount: 0.1, description: "예상 및 추정" },
+    { name: "광고선전비 인상율", amount: 0.1, description: "예상 및 추정" },
+    { name: "예비비 인상율", amount: 0.05, description: "예상 및 추정" },
   ]);
 
   // 기존 원가 항목의 금액을 변경할 수 있는 입력 필드와 핸들러
@@ -33,7 +41,10 @@ const PerformanceCalculator = (props: Props) => {
   // 새 원가 항목을 추가할 수 있는 입력 필드와 핸들러
   const handleAddCostItem = () => {
     console.log("handleAddCostItem");
-    setCostItems([...costItems, { name: "항목입력", amount: 0 }]);
+    setCostItems([
+      ...costItems,
+      { name: "항목입력", amount: 0, description: "" },
+    ]);
   };
 
   const handleRemoveCostItem = (targetIndex: number) => {
@@ -66,46 +77,19 @@ const PerformanceCalculator = (props: Props) => {
           <tr>
             <th>구분</th>
             <th>원가 항목</th>
-            <th>금액</th>
+            <th>비고</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>수익</th>
-            <th>매출 단위</th>
-            <td>{sellingPrice ? sellingPrice.toLocaleString() : 0}</td>
-          </tr>
-          <tr>
-            <th rowSpan={2}>매출원가</th>
-            <th>원가 단위</th>
-            <td>{totalPrice ? totalPrice.toLocaleString() : 0}</td>
-          </tr>
-          <tr>
-            <th>원가율</th>
-            <td>
-              {sellingPrice && totalPrice
-                ? calculateCostRate(sellingPrice, totalPrice).toFixed(0)
-                : 0}
-              %
-            </td>
-          </tr>
           {costItems.map((item, index) => (
             <tr key={index}>
-              {index === 0 && <th rowSpan={costItems.length}>원가</th>}
               <th>{item.name}</th>
               <td className={styled.em}>
-                {item.amount ? item.amount.toLocaleString() : 0}
+                {item.amount ? (item.amount * 100).toLocaleString() : 0}%
               </td>
+              <th>{item.description}</th>
             </tr>
           ))}
-          <tr>
-            <th colSpan={2} className={styled.total}>
-              판관비 계(연비용)
-            </th>
-            <td className={styled.total}>
-              {totalCost ? totalCost.toLocaleString() : 0}
-            </td>
-          </tr>
         </tbody>
       </table>
 
@@ -148,4 +132,4 @@ const PerformanceCalculator = (props: Props) => {
   );
 };
 
-export default PerformanceCalculator;
+export default IncreaseRateCalulator;

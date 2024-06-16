@@ -256,9 +256,35 @@
     }
   }
   .tableContentsWrap {
+    .xScroll {
+      overflow-y: hidden;
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        height: 6px; /* 스크롤바의 너비 */
+      }
+
+      &::-webkit-scrollbar-thumb {
+        height: 30%; /* 스크롤바의 길이 */
+        background: #ccc; /* 스크롤바의 색상 */
+
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1); /*스크롤바 뒷 배경 색상*/
+      }
+    }
     table {
       width: 100%;
       border-collapse: collapse;
+      &.years10 {
+        width: 1600px;
+        table-layout: fixed;
+        th,
+        td {
+          width: auto;
+        }
+      }
       th,
       td {
         width: calc(100% / 3);

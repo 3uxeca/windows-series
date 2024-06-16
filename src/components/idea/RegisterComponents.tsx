@@ -7,6 +7,8 @@ import PriceTable from "./PriceTable";
 import PriceCalculator from "./PriceCalculator";
 import useIdeaPriceStore from "@/store/useIdeaPriceStore";
 import PerformanceCalculator from "./PerformanceCalculator";
+import IncreaseRateCalulator from "./IncreaseRateCalulator";
+import FinanceCaculator from "./FinanceCaculator";
 
 type Props = {
   activeIndex: number;
@@ -224,22 +226,7 @@ const RegisterComponents = ({ activeIndex, setActiveIndex }: Props) => {
               <div className={styled.tableInfo}>단위: %</div>
             </div>
             <div className={styled.tableContentsWrap}>
-              <PriceTable />
-            </div>
-          </div>
-          <div className={styled.inputContainer}>
-            <div className={styled.inputHeader}>
-              <div className={styled.btnInput}>+ 원가 항목 추가</div>
-            </div>
-            <div className={styled.inputWrap}>
-              <div className={styled.inputItem}>
-                <div className={styled.iconInfo}></div>
-                <div className={styled.title}>급여인상율</div>
-                <div className={styled.input}>
-                  <input type="text" placeholder="금액을 입력하세요." />
-                </div>
-                <div className={styled.iconRemove}></div>
-              </div>
+              <IncreaseRateCalulator />
             </div>
           </div>
         </div>
@@ -263,7 +250,7 @@ const RegisterComponents = ({ activeIndex, setActiveIndex }: Props) => {
               <div className={styled.tableInfo}>단위: 수, 원, %</div>
             </div>
             <div className={styled.tableContentsWrap}>
-              <PriceTable />
+              <FinanceCaculator />
             </div>
           </div>
           <div className={styled.inputContainer}>

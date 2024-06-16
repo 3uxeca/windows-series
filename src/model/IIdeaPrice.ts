@@ -1,3 +1,0 @@
-interface IIdeaPrice {
-  sellingPrice?: number;
-}
