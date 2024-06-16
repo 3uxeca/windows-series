@@ -1,0 +1,3 @@
+interface IIdeaPrice {
+  sellingPrice?: number;
+}

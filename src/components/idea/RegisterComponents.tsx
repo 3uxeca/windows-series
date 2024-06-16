@@ -4,6 +4,9 @@ import styled from "@/components/idea/Idea.module.scss";
 import FileUpload from "./FileUpload";
 import CustomSelectBox from "../common/CustomSelectBox";
 import PriceTable from "./PriceTable";
+import PriceCalculator from "./PriceCalculator";
+import useIdeaPriceStore from "@/store/useIdeaPriceStore";
+import PerformanceCalculator from "./PerformanceCalculator";
 
 type Props = {
   activeIndex: number;
@@ -160,6 +163,7 @@ const RegisterComponents = ({ activeIndex, setActiveIndex }: Props) => {
     );
   };
   const Step2 = () => {
+    const { sellingPrice, sgnaExpenses } = useIdeaPriceStore();
     return (
       <>
         <div className={`${styled.section} ${styled.price}`}>
@@ -181,22 +185,8 @@ const RegisterComponents = ({ activeIndex, setActiveIndex }: Props) => {
               <div className={styled.tableInfo}>단위: 원, %</div>
             </div>
             <div className={styled.tableContentsWrap}>
-              <PriceTable />
-            </div>
-          </div>
-          <div className={styled.inputContainer}>
-            <div className={styled.inputHeader}>
-              <div className={styled.btnInput}>+ 원가 항목 추가</div>
-            </div>
-            <div className={styled.inputWrap}>
-              <div className={styled.inputItem}>
-                <div className={styled.iconInfo}></div>
-                <div className={styled.title}>직접재료비</div>
-                <div className={styled.input}>
-                  <input type="text" placeholder="금액을 입력하세요." />
-                </div>
-                <div className={styled.iconRemove}></div>
-              </div>
+              {/* <PriceTable /> */}
+              <PriceCalculator />
             </div>
           </div>
           <div className={styled.totalContainer}>
@@ -204,7 +194,7 @@ const RegisterComponents = ({ activeIndex, setActiveIndex }: Props) => {
               판매가<span>(소비자가격)</span>
             </div>
             <div className={styled.amount}>
-              <span>30,000</span>원
+              <span>{sellingPrice ? sellingPrice.toLocaleString() : 0}</span>원
             </div>
           </div>
           <div className={styled.tableContainer}>
@@ -215,22 +205,7 @@ const RegisterComponents = ({ activeIndex, setActiveIndex }: Props) => {
               <div className={styled.tableInfo}>단위: 원, %</div>
             </div>
             <div className={styled.tableContentsWrap}>
-              <PriceTable />
-            </div>
-          </div>
-          <div className={styled.inputContainer}>
-            <div className={styled.inputHeader}>
-              <div className={styled.btnInput}>+ 원가 항목 추가</div>
-            </div>
-            <div className={styled.inputWrap}>
-              <div className={styled.inputItem}>
-                <div className={styled.iconInfo}></div>
-                <div className={styled.title}>급여</div>
-                <div className={styled.input}>
-                  <input type="text" placeholder="금액을 입력하세요." />
-                </div>
-                <div className={styled.iconRemove}></div>
-              </div>
+              <PerformanceCalculator />
             </div>
           </div>
           <div className={styled.totalContainer}>
@@ -238,7 +213,7 @@ const RegisterComponents = ({ activeIndex, setActiveIndex }: Props) => {
               판관비 계<span>(연비용)</span>
             </div>
             <div className={styled.amount}>
-              <span>64,600,000</span>원
+              <span>{sgnaExpenses ? sgnaExpenses.toLocaleString() : 0}</span>원
             </div>
           </div>
           <div className={styled.tableContainer}>

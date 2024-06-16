@@ -1,19 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import styled from "@/components/idea/Idea.module.scss";
 import useIdeaPriceStore from "@/store/useIdeaPriceStore";
+import styled from "@/components/idea/Idea.module.scss";
 
-const PriceCalculator: React.FC = () => {
-  const { setSellingPrice, setTotalPrice } = useIdeaPriceStore();
+type Props = {};
+
+const PerformanceCalculator = (props: Props) => {
+  const { setSgnaExpenses, totalPrice, sellingPrice } = useIdeaPriceStore();
   // 원가 항목을 관리하는 상태
   const [costItems, setCostItems] = useState<ICostItem[]>([
-    { name: "직접재료비", amount: 7000 },
-    { name: "직접노무비", amount: 2000 },
-    { name: "직접경비", amount: 2000 },
-    { name: "제조간접비", amount: 1000 },
+    { name: "급여(1인 평균)", amount: 35000000 },
+    { name: "업무추진비", amount: 3600000 },
+    { name: "사무실 임차료", amount: 6000000 },
+    { name: "접대비", amount: 5000000 },
+    { name: "광고선전비", amount: 12000000 },
+    { name: "예비비용", amount: 3000000 },
   ]);
-  // 이익률을 관리하는 상태
-  const [profitMargin, setProfitMargin] = useState(150);
+
+  // 새로 추가할 원가 항목의 이름과 금액을 관리하는 상태
+  const [newItemName, setNewItemName] = useState("");
+  const [newItemAmount, setNewItemAmount] = useState(0);
 
   // 기존 원가 항목의 금액을 변경할 수 있는 입력 필드와 핸들러
   const handleCostChange = (index: number, amount: number) => {
@@ -32,6 +38,8 @@ const PriceCalculator: React.FC = () => {
   const handleAddCostItem = () => {
     console.log("handleAddCostItem");
     setCostItems([...costItems, { name: "항목입력", amount: 0 }]);
+    setNewItemName("");
+    setNewItemAmount(0);
   };
 
   const handleRemoveCostItem = (targetIndex: number) => {
@@ -43,17 +51,19 @@ const PriceCalculator: React.FC = () => {
 
   // 모든 원가 항목의 합계
   const totalCost = costItems.reduce((sum, item) => sum + item.amount, 0);
-  // totalCost와 profitMargin을 바탕으로 계산된 판매 가격
-  const sellingPrice = totalCost * (1 + profitMargin / 100);
 
   useEffect(() => {
-    console.log("totalPrice (원가 단위) :: ", totalCost);
-    setTotalPrice(totalCost);
+    console.log("S&GA Expenses :: ", totalCost);
+    setSgnaExpenses(totalCost);
   }, [totalCost]);
-  useEffect(() => {
-    console.log("sellingPrice (판매가 소비자 가격) :: ", sellingPrice);
-    setSellingPrice(sellingPrice);
-  }, [sellingPrice]);
+
+  function calculateCostRate(salesUnit: number, costUnit: number): number {
+    if (salesUnit === 0) {
+      throw new Error("Sales unit cannot be zero");
+    }
+    const costRate = (costUnit / salesUnit) * 100;
+    return costRate;
+  }
 
   return (
     <div>
@@ -66,6 +76,25 @@ const PriceCalculator: React.FC = () => {
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <th>수익</th>
+            <th>매출 단위</th>
+            <td>{sellingPrice ? sellingPrice.toLocaleString() : 0}</td>
+          </tr>
+          <tr>
+            <th rowSpan={2}>매출원가</th>
+            <th>원가 단위</th>
+            <td>{totalPrice ? totalPrice.toLocaleString() : 0}</td>
+          </tr>
+          <tr>
+            <th>원가율</th>
+            <td>
+              {sellingPrice && totalPrice
+                ? calculateCostRate(sellingPrice, totalPrice).toFixed(0)
+                : 0}
+              %
+            </td>
+          </tr>
           {costItems.map((item, index) => (
             <tr key={index}>
               {index === 0 && <th rowSpan={costItems.length}>원가</th>}
@@ -76,17 +105,11 @@ const PriceCalculator: React.FC = () => {
             </tr>
           ))}
           <tr>
-            <th colSpan={2}>이익율(마진)</th>
-            <td className={styled.em}>
-              {profitMargin ? profitMargin.toLocaleString() : 0}%
-            </td>
-          </tr>
-          <tr>
             <th colSpan={2} className={styled.total}>
-              판매가(소비자가격)
+              판관비 계(연비용)
             </th>
             <td className={styled.total}>
-              {sellingPrice ? sellingPrice.toLocaleString() : 0}
+              {totalCost ? totalCost.toLocaleString() : 0}
             </td>
           </tr>
         </tbody>
@@ -125,23 +148,10 @@ const PriceCalculator: React.FC = () => {
               ></div>
             </div>
           ))}
-          <div className={styled.inputItem}>
-            <div className={styled.iconInfo}></div>
-            <div className={styled.title}>이익율</div>
-            <div className={styled.input}>
-              <input
-                type="number"
-                value={profitMargin}
-                placeholder="금액을 입력하세요."
-                onChange={(e) => setProfitMargin(Number(e.target.value))}
-              />
-            </div>
-            <div className={styled.iconRemove}></div>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default PriceCalculator;
+export default PerformanceCalculator;
