@@ -73,10 +73,15 @@
 
 // 카드 래퍼
 .cardWrap {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  // width: 100%;
+  // display: flex;
+  // justify-content: flex-start;
+  // align-items: center;
+  // column-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   column-gap: 16px;
+  row-gap: 16px;
 }
 
 // 테마 카테고리 목록
@@ -345,7 +350,7 @@
         @include background;
         width: 12px;
         height: 12px;
-        background-image: url('/images/icon-sort-arrow-up.png');
+        background-image: url("/images/icon-sort-arrow-up.png");
         margin-right: 24px;
         cursor: pointer;
         &.close {
@@ -365,9 +370,10 @@
               content: "|";
               color: #e8ecf2;
               margin: 0 8px;
-            }          
+            }
           }
-          &:hover,&.active {
+          &:hover,
+          &.active {
             font-weight: 700;
           }
         }
